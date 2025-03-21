@@ -1,0 +1,28 @@
+apiVersion: kfdef.apps.kubeflow.org/v1
+kind: KfDef
+metadata:
+  name: kubeflow
+  namespace: kubeflow
+spec:
+  applications:
+    - name: istio
+      kustomizeConfig:
+        repoRef:
+          name: manifests
+          path: common/istio
+      enabled: true
+    - name: cert-manager
+      kustomizeConfig:
+        repoRef:
+          name: manifests
+          path: common/cert-manager
+      enabled: true
+    - name: kubeflow-pipelines
+      kustomizeConfig:
+        repoRef:
+          name: manifests
+          path: apps/pipeline
+      enabled: true
+  repos:
+    - name: manifests
+      uri: https://github.com/kubeflow/manifests.git
